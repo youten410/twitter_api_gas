@@ -1,5 +1,5 @@
 function devmain(next_results){
-	let params = '';
+	let params = '';aaa 
   params = next_results;
   let dataArray = [];
   let idArray = [];
@@ -9,10 +9,8 @@ function devmain(next_results){
 	while(true){
 		  const api = getTwitterService();
       let req_url = "https://api.twitter.com/1.1/search/tweets.json" + params + "&tweet_mode=extended";
-      console.log(req_url);
 		  const data = api.fetch(req_url);
-		  const jsonObj =　JSON.parse(data);
-      //console.log(jsonObj);
+		  const jsonObj = JSON.parse(data);
 
 		  for(let i=0;i<jsonObj.statuses.length;i++){
 		      let content = jsonObj.statuses[i];
@@ -23,7 +21,7 @@ function devmain(next_results){
           let user_name = content.user.name;
           let source = content.source.replace(/(<([^>]+)>)/gi, '');
 
-          if(content.retweeted_status || content.possibily_sensitive || user_name.includes("オトク情報館") || user_name.includes("LOQUY広報部") || user_name.includes("BIGLOBE") || user_name.includes("im_fine0829") || user_name.includes("テルル") || user_name.includes("スマホ、モバイルブログ") || user_name.includes("モバワン") || user_name.includes("かたづけ") || user_name.includes("舞台DVD")|| user_name.includes("店") || user_name.includes("user_name") || user_name.includes("horo")　|| user_name.includes("まだショップで買ってるの？") || user_name.includes("Bot") || user_name.includes("bot") || source === "Botbird tweets" || source === "twittbot.net" || source === "SocialDog for Twitter" || source === "Twitter for Advertisers" || source === "格安SIM比較ウェブ" || source === "Tweetbot for Mac" || source === "Tweetbot for iΟS"　|| source === "WordPress.com"　|| user_name.includes("おすすめセレクション") || user_name.includes("インターネット回線研究所")){
+          if(content.possibily_sensitive || user_name.includes("オトク情報館") || user_name.includes("LOQUY広報部") || user_name.includes("BIGLOBE") || user_name.includes("im_fine0829") || user_name.includes("テルル") || user_name.includes("スマホ、モバイルブログ") || user_name.includes("モバワン") || user_name.includes("かたづけ") || user_name.includes("舞台DVD")|| user_name.includes("店") || user_name.includes("user_name") || user_name.includes("horo")　|| user_name.includes("まだショップで買ってるの？") || user_name.includes("Bot") || user_name.includes("bot") || source === "Botbird tweets" || source === "twittbot.net" || source === "SocialDog for Twitter" || source === "Twitter for Advertisers" || source === "格安SIM比較ウェブ" || source === "Tweetbot for Mac" || source === "Tweetbot for iΟS"　|| source === "WordPress.com"　|| user_name.includes("おすすめセレクション") || user_name.includes("インターネット回線研究所")){
             //console.log(content.user.name,text);
             //console.log(content.retweeted_status);
             //update(content.retweeted_status);
@@ -89,25 +87,6 @@ function devmain(next_results){
               // }
             }
 
-            //動画URL取得&display_urlに置換
-            if(content.extended_entities === undefined){
-              //console.log("extended_entitiesはありません");
-            }else{
-              if(content.extended_entities.media[0].video_info === undefined){
-                //console.log("video_infoはありません");
-              }else{
-                let video_info = content.extended_entities.media[0].video_info.variants;
-
-                for(let i=0;i<video_info.length;i++){
-                  if(video_info[i].content_type　=== "video/mp4"){
-                    video_link = video_info[i].url;
-
-                    break;
-                  }
-                }
-              }
-            }
-
             let judge_id = tweet_id;
             //これツイート消されたら参照できなくなるので、違うやり方考えた方がいい
             if(judge_id <= dev_id){
@@ -118,13 +97,12 @@ function devmain(next_results){
               break;
             }
 		        //配列へ格納
-            dataArray.push([created_date,created_time,user_name,text,photo,video_link,expanded_url,retweet_count,favorite_count,followers_count,source,tweet_id]);
+            dataArray.push([created_date,created_time,user_name,text,photo,expanded_url,retweet_count,favorite_count,followers_count,source,tweet_id]);
             idArray.push(tweet_id);
 		      }
 		  }
 
 		let nextResult = jsonObj.search_metadata.next_results;
-    console.log(`nextResult: ${nextResult}`);
 
     if(!nextResult || judge === 'YES'){
         Logger.log("終了しました");
