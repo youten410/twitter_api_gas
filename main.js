@@ -8,11 +8,11 @@ function devmain(next_results){
 
 	while(true){
 		  const api = getTwitterService();
-      let req_url = "https://api.twitter.com/1.1/search/tweets.json?" + params + "&count=100&lang=ja&tweet_mode=extended&result_type=recent";
+      let req_url = "https://api.twitter.com/1.1/search/tweets.json" + params + "&tweet_mode=extended";
       console.log(req_url);
 		  const data = api.fetch(req_url);
-		  const jsonObj = JSON.parse(data);
-      console.log(jsonObj);
+		  const jsonObj =　JSON.parse(data);
+      //console.log(jsonObj);
 
 		  for(let i=0;i<jsonObj.statuses.length;i++){
 		      let content = jsonObj.statuses[i];
@@ -26,7 +26,7 @@ function devmain(next_results){
           if(content.retweeted_status || content.possibily_sensitive || user_name.includes("オトク情報館") || user_name.includes("LOQUY広報部") || user_name.includes("BIGLOBE") || user_name.includes("im_fine0829") || user_name.includes("テルル") || user_name.includes("スマホ、モバイルブログ") || user_name.includes("モバワン") || user_name.includes("かたづけ") || user_name.includes("舞台DVD")|| user_name.includes("店") || user_name.includes("user_name") || user_name.includes("horo")　|| user_name.includes("まだショップで買ってるの？") || user_name.includes("Bot") || user_name.includes("bot") || source === "Botbird tweets" || source === "twittbot.net" || source === "SocialDog for Twitter" || source === "Twitter for Advertisers" || source === "格安SIM比較ウェブ" || source === "Tweetbot for Mac" || source === "Tweetbot for iΟS"　|| source === "WordPress.com"　|| user_name.includes("おすすめセレクション") || user_name.includes("インターネット回線研究所")){
             //console.log(content.user.name,text);
             //console.log(content.retweeted_status);
-            update(content.retweeted_status);
+            //update(content.retweeted_status);
 		      }else{
             //スクリーンネーム
             let screen_name = content.user.screen_name;
@@ -46,6 +46,7 @@ function devmain(next_results){
             let retweet_count = content.retweet_count;
             //ツイート元URL
             let tweet_link = `https://twitter.com/${screen_name}/status/${tweet_id}`;
+            
 
             user_name = `=HYPERLINK(\"${tweet_link}\",\"${user_name}\")`;
 
@@ -129,9 +130,9 @@ function devmain(next_results){
         Logger.log("終了しました");
         if(dataArray.length !== 0){
           console.log(dataArray);
-          writeSheetMegeTest(dataArray);
-          setScriptProperty(idArray[0]);
-          console.log(idArray[0],typeof(idArray[0]));
+          // writeSheetMegeTest(dataArray);
+          // setScriptProperty(idArray[0]);
+          // console.log(idArray[0],typeof(idArray[0]));
         }
         //removeDouble;
         break;
@@ -142,7 +143,7 @@ function devmain(next_results){
 }
 
 function start_devmain(){
-  devmain("q=biglobe%20%28donedone%20OR%20ビッグローブ%20OR%20モバイル%20OR%20契約%20OR%20sim%20OR%20光%20OR%20解約%20OR%20モバイ%20OR%20解約%20OR%20エンタメフリ%20OR%20MNP%20OR%20メール%20OR%20サービス%20OR%20工事%20OR%20被害%20OR%20遅い%20OR%20繋がらない%20OR%20モバイル%20OR%20遅い%20OR%20ネットワーク%20OR%20引き止め%20OR%20解約チャレンジ%20OR%20アプリ%20OR%20メール%20OR%20wifi%20OR%20セキュリティ%20OR%20電話%20OR%20でんわ%20OR%20ひかり電話%20OR%20電気%20OR%20でんき%20OR%20光テレビ%29%20-%28from%3ABIGLOBE%20OR%20from%3Ashunkannews%29%20-%22BIGLOBEニュース%22-%22news.biglobe.ne.jp%22");
+  devmain("?count=100&q=biglobe%20%28donedone%20OR%20ビッグローブ%20OR%20モバイル%20OR%20契約%20OR%20sim%20OR%20光%20OR%20解約%20OR%20モバイ%20OR%20解約%20OR%20エンタメフリ%20OR%20MNP%20OR%20メール%20OR%20サービス%20OR%20工事%20OR%20被害%20OR%20遅い%20OR%20繋がらない%20OR%20モバイル%20OR%20遅い%20OR%20ネットワーク%20OR%20引き止め%20OR%20解約チャレンジ%20OR%20アプリ%20OR%20メール%20OR%20wifi%20OR%20セキュリティ%20OR%20電話%20OR%20でんわ%20OR%20ひかり電話%20OR%20電気%20OR%20でんき%20OR%20光テレビ%29%20-%28from%3ABIGLOBE%20OR%20from%3Ashunkannews%29%20-%22BIGLOBEニュース%22-%22news.biglobe.ne.jp%22&lang=ja&result_type=recent");
 }
 
 //いいね数などを更新

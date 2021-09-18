@@ -10,7 +10,7 @@
 
 
 function looking(){
-  let value =  PropertiesService.getScriptProperties().getProperty('sheet_name');
+  let value =  PropertiesService.getScriptProperties().getProperty('dev_id');
   Logger.log(value);
 }
 
