@@ -1,5 +1,5 @@
 function devmain(next_results){
-	let params = '';aaa 
+	let params = '';
   params = next_results;
   let dataArray = [];
   let idArray = [];
@@ -14,17 +14,16 @@ function devmain(next_results){
 
 		  for(let i=0;i<jsonObj.statuses.length;i++){
 		      let content = jsonObj.statuses[i];
-          let video_link = '';
           let expanded_url = '';
           let photo = '';
           let text = content.full_text;
           let user_name = content.user.name;
           let source = content.source.replace(/(<([^>]+)>)/gi, '');
 
-          if(content.possibily_sensitive || user_name.includes("オトク情報館") || user_name.includes("LOQUY広報部") || user_name.includes("BIGLOBE") || user_name.includes("im_fine0829") || user_name.includes("テルル") || user_name.includes("スマホ、モバイルブログ") || user_name.includes("モバワン") || user_name.includes("かたづけ") || user_name.includes("舞台DVD")|| user_name.includes("店") || user_name.includes("user_name") || user_name.includes("horo")　|| user_name.includes("まだショップで買ってるの？") || user_name.includes("Bot") || user_name.includes("bot") || source === "Botbird tweets" || source === "twittbot.net" || source === "SocialDog for Twitter" || source === "Twitter for Advertisers" || source === "格安SIM比較ウェブ" || source === "Tweetbot for Mac" || source === "Tweetbot for iΟS"　|| source === "WordPress.com"　|| user_name.includes("おすすめセレクション") || user_name.includes("インターネット回線研究所")){
+        if (content.retweeted_status || text.includes('www5e.biglobe.ne.jp') || content.possibily_sensitive || user_name.includes("オトク情報館") || user_name.includes("LOQUY広報部") || user_name.includes("BIGLOBE") || user_name.includes("im_fine0829") || user_name.includes("テルル") || user_name.includes("スマホ、モバイルブログ") || user_name.includes("モバワン") || user_name.includes("かたづけ") || user_name.includes("舞台DVD")|| user_name.includes("店") || user_name.includes("user_name") || user_name.includes("horo")　|| user_name.includes("まだショップで買ってるの？") || user_name.includes("Bot") || user_name.includes("bot") || source === "Botbird tweets" || source === "twittbot.net" || source === "SocialDog for Twitter" || source === "Twitter for Advertisers" || source === "格安SIM比較ウェブ" || source === "Tweetbot for Mac" || source === "Tweetbot for iΟS" || source === "WordPress.com" || user_name.includes("おすすめセレクション") || user_name.includes("インターネット回線研究所")){
             //console.log(content.user.name,text);
             //console.log(content.retweeted_status);
-            //update(content.retweeted_status);
+            update(content.retweeted_status);
 		      }else{
             //スクリーンネーム
             let screen_name = content.user.screen_name;
@@ -108,7 +107,7 @@ function devmain(next_results){
         Logger.log("終了しました");
         if(dataArray.length !== 0){
           console.log(dataArray);
-          // writeSheetMegeTest(dataArray);
+          //writeSheetMegeTest(dataArray);
           // setScriptProperty(idArray[0]);
           // console.log(idArray[0],typeof(idArray[0]));
         }
